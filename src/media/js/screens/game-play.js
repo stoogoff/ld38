@@ -190,19 +190,5 @@ define(function(require) {
 		});
 	};
 
-	GamePlay.prototype.render = function() {
-		//this.grid.render();
-		//this.target.render();
-		//this.sequence.render();
-		//this.overlay.render();
-		//this.game.debug.spriteInfo(sun, 32, 32)
-		if(target) {
-			this.game.debug.text("target.x = " + target.x, 32, 100);
-			this.game.debug.text("target.y = " + target.y, 32, 120);
-			this.game.debug.text("target.health = " + target.health, 32, 140);
-			this.game.debug.text("target.alive = " + target.alive, 32, 160);
-		}
-	};
-
 	return GamePlay;
 });

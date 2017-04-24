@@ -1,3 +1,4 @@
+support/
 dist/
 **/node_modules
 *.xcf

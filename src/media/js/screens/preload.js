@@ -18,7 +18,7 @@ define(function(require) {
 		this.load.spritesheet("planet", "media/img/planets.png", 32, 32);
 
 
-		this.load.audio("theme", ["media/audio/small-worlds.mp3", "media/audio/small-worlds.ogg", "media/audio/small-worlds.wav"]);
+		this.load.audio("theme", ["media/audio/small-worlds.mp3", "media/audio/small-worlds.ogg"]);
 	
 		var sfx = ["chomp", "shoot", "thrust"];
 
