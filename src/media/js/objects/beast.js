@@ -2,9 +2,12 @@
 define(function(require) {
 	// imports
 	var inherits = require("../utils/inherits");
+	var Interval = require("../utils/interval");
+
+	var trackingPlanet = new Interval(10000);
 
 	var Beast = function(game, x, y) {
-		Phaser.Sprite.call(this, game, x, y, "beast");
+		Phaser.Sprite.call(this, game, x, y, "beasty");
 
 		game.physics.arcade.enable(this);
 		game.add.existing(this);
@@ -15,12 +18,16 @@ define(function(require) {
 		this.body.immovable = true;
 
 		this.data = {};
-		this.data.range = 250;
 		this.data.target = null;
 		this.data.slow = 15;
-		this.data.fast = 60;
+		this.data.fast = 500;
 
 		this.health = 10;
+
+		this.animations.add("run");
+		this.animations.play("run", 5, true);
+
+		this.height = this.width = 80;
 	};
 
 	inherits(Beast, Phaser.Sprite);
@@ -29,23 +36,29 @@ define(function(require) {
 	// if no planet within its range it goes for the sun
 
 	Beast.prototype.moveTowards = function(planets, sun) {
-		var closest = planets.map(function(m) {
-			return {
-				x: m.x,
-				y: m.y,
-				d: Phaser.Point.distance(m, this)
-			};
-		}.bind(this)).filter(function(f) {
-			return f.d <= this.data.range;
-		}.bind(this)).sort(function(a, b) {
-			return a.d == b.d ? 0 : (a.d < b.d ? 1: -1)
-		});
-
-		if(closest.length) {
-			this.data.target = closest[0];
+		if(this.data.target && this.data.target.alive) {
+			if(!trackingPlanet.next(this.game.time.elapsed)) {
+				return this.data.target;
+			}
 		}
 
-		return null;
+		trackingPlanet.reset();
+
+		this.data.target = null;
+
+
+		var closest = planets.map(function(m) {
+			return {
+				sprite: m,
+				d: Phaser.Point.distance(m, this)
+			};
+		}.bind(this)).sort(function(a, b) {
+			return a.d == b.d ? 0 : (a.d < b.d ? -1 : 1)
+		});
+
+		this.data.target = closest[0].sprite;
+
+		return this.data.target;
 	};
 
 	Beast.prototype.hit = function() {

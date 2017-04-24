@@ -1,6 +1,7 @@
 
 define(function(require) {
 	var inherits = require("../utils/inherits");
+	var Hittable = require("./hittable");
 
 	var Ship = function(game, x, y) {
 		Phaser.Sprite.call(this, game, x, y, "ship");
@@ -8,6 +9,7 @@ define(function(require) {
 		game.physics.arcade.enable(this);
 		game.add.existing(this);
 
+		this.health = 10;
 		this.anchor.set(0.5);
 		this.body.drag.set(70);
 		this.body.maxVelocity.set(200);
@@ -19,15 +21,36 @@ define(function(require) {
 		this.weapon.fireRate = 500;
 
 		this.weapon.trackSprite(this, 0, 0, true);
+
+		this.sfx = {
+			thrust: this.game.add.audio("thrust"),
+			shoot: this.game.add.audio("shoot")
+		};
+
+		this.sfx.thrust.volume = 0.2;
+		this.sfx.shoot.volume = 0.2;
+
+		//this.hittable = new Hittable(this, 1000);
 	};
 
 	inherits(Ship, Phaser.Sprite);
 
+	Ship.prototype.thrust = function() {
+		this.frame = 1;
+		this.sfx.thrust.play();
+	};
+
+	Ship.prototype.stop = function() {
+		this.frame = 0;
+	};
+
 	Ship.prototype.fire = function() {
+		this.sfx.shoot.play();
 		return this.weapon.fire();
 	};
 
 	Ship.prototype.hit = function() {
+		//return this.hittable.hit();
 		this.damage(1);
 
 		return this.health <= 0;

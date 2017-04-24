@@ -10,8 +10,8 @@ define(function(require) {
 
 	// Game States
 	game.state.add("preload", require("./screens/preload"));
-	//game.state.add("start", menus.Start);
-	//game.state.add("gameover", menus.GameOver);
+	game.state.add("start", menus.Start);
+	game.state.add("gameover", menus.GameOver);
 	game.state.add("play", require("./screens/game-play"));
 
 	game.state.start("preload");

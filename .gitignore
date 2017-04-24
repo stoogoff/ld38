@@ -4,3 +4,6 @@ dist/
 *.kra
 *.kra~
 *.png~
+*.wav
+*.mp3
+*.ogg

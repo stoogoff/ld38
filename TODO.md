@@ -10,10 +10,11 @@
 
 Graphics for:
 
-- beasty (animated)
-- planets
-- sun (animated?)
-- spaceship
-- bullets
+- `beasty (animated)`
+- `planets`
+- `sun (animated?)`
+- `spaceship`
+	- `animated thrust`
+- `bullets`
 - hits (flash?)
 - expolosion (animated)

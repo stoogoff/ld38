@@ -6,26 +6,29 @@ define(function(require) {
 
 	Preload.prototype.preload = function() {
 		//var bg = ["background", "menu", "mute"];
-		var bg = ["bullet", "ship", "planet", "beast", "background-texture"];
+		var bg = ["background", "bullet", "sun", "background-texture", "radar"];
 
 		bg.forEach(function(key) {
 			this.load.image(key, "media/img/" + key + ".png");
 
 		}.bind(this));
 
-		/*this.load.spritesheet("retry", "media/img/retry.png", 180, 40);
-		this.load.audio("theme", ["media/audio/music.mp3", "media/audio/music.ogg"]);
+		this.load.spritesheet("beasty", "media/img/beasty.png", 60, 60, 8);
+		this.load.spritesheet("ship", "media/img/ship.png", 32, 20);
+		this.load.spritesheet("planet", "media/img/planets.png", 32, 32);
 
-		var sfx = ["activate", "badlink", "completelevel", "deactivate", "goodlink"];
+
+		this.load.audio("theme", ["media/audio/small-worlds.mp3", "media/audio/small-worlds.ogg", "media/audio/small-worlds.wav"]);
+	
+		var sfx = ["chomp", "shoot", "thrust"];
 
 		sfx.forEach(function(key) {
 			this.load.audio(key, ["media/audio/" + key + ".wav"]);
-		}.bind(this));*/
+		}.bind(this));
 	};
 
 	Preload.prototype.create = function() {
-		//this.game.state.start("start");
-		this.game.state.start("play");
+		this.game.state.start("start");
 	};
 
 	return Preload;

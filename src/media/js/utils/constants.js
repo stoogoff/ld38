@@ -6,6 +6,24 @@ define(function(require) {
 		SCREEN_WIDTH: 1024,
 		SCREEN_HEIGHT: 768,
 
-		GAME_SIZE: 1920
+		GAME_SIZE: 1920,
+
+		STYLES: {
+			HUD: {
+				font: "bold 20px Arial",
+				fill: "#ffffff"
+			},
+			TITLE: {
+				font: "65px Arial",
+				fill: "#ffffff",
+				align: "center",
+				stroke: "black",
+				strokeThickness: 2
+			},
+			BODY: {
+				font: "16px Arial",
+				fill: "#ffffff"
+			}
+		}
 	};
 });

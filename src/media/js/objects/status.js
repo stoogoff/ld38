@@ -2,8 +2,9 @@
 define(function(require) {
 	// imports
 	var inherits = require("../utils/inherits");
+	var constants = require("../utils/constants");
 
-	var Status = function(game, x, y, width, height, owner, stat, colour) {
+	var Status = function(game, x, y, width, height, owner, stat, colour, text) {
 		Phaser.TileSprite.call(this, game, x, y, width, height, "background-texture");
 
 		game.add.existing(this);
@@ -37,6 +38,9 @@ define(function(require) {
 
 		this.border = game.add.sprite(x, y, outline);
 		this.border.fixedToCamera = true;
+
+		this.text = game.add.text(x, y + 25, text, constants.STYLES.HUD);
+		this.text.fixedToCamera = true;
 	};
 
 	inherits(Status, Phaser.TileSprite);

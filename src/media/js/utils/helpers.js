@@ -15,6 +15,16 @@ define(function(require) {
 			return num;
 		},
 
+		range: function(length) {
+			var range = [];
+
+			for(var i = 0; i < length; ++i) {
+				range.push(i);
+			}
+
+			return range;
+		},
+
 		random: function(min, max) {
 			if (max == null) {
 				max = min;
